@@ -1,7 +1,7 @@
 # strcmp
 String comparison functions from FEBRL
 
-
+```
   exact          Exact comparison
   jaro           Jaro
   winkler        Winkler (based on Jaro)  (for backwards compatibility)
@@ -29,3 +29,4 @@ String comparison functions from FEBRL
                  using a selectable approximate string comparison function
   charhistogram  Get histogram of characters for both strings and calculate the
                  cosine similarity between the two histogram vectors
+```
