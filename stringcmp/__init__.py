@@ -1,29 +1,29 @@
 # =============================================================================
 # AUSTRALIAN NATIONAL UNIVERSITY OPEN SOURCE LICENSE (ANUOS LICENSE)
 # VERSION 1.3
-# 
+#
 # The contents of this file are subject to the ANUOS License Version 1.3
 # (the "License"); you may not use this file except in compliance with
 # the License. You may obtain a copy of the License at:
-# 
+#
 #   https://sourceforge.net/projects/febrl/
-# 
+#
 # Software distributed under the License is distributed on an "AS IS"
 # basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
 # the License for the specific language governing rights and limitations
 # under the License.
-# 
+#
 # The Original Software is: "stringcmp.py"
-# 
+#
 # The Initial Developer of the Original Software is:
 #   Dr Peter Christen (Research School of Computer Science, The Australian
 #                      National University)
-# 
+#
 # Copyright (C) 2002 - 2011 the Australian National University and
 # others. All Rights Reserved.
-# 
+#
 # Contributors:
-# 
+#
 # Alternatively, the contents of this file may be used under the terms
 # of the GNU General Public License Version 2 or later (the "GPL"), in
 # which case the provisions of the GPL are applicable instead of those
@@ -95,9 +95,9 @@ import math
 import time
 import zlib
 
-import encode  # For Phonix transformation routine (used in syllable alignment
+from . import encode  # For Phonix transformation routine (used in syllable alignment
                # distance)
-import mymath  # Contains arithmetic coder
+from . import mymath  # Contains arithmetic coder
 
 # =============================================================================
 # Special character used in the Jaro, Winkler and q-gram comparions functions.
@@ -811,7 +811,7 @@ def posqgram(str1, str2, q=2, max_dist = 2, common_divisor = 'average',
   for pos_q_gram in short_qgram_list:
     (q_gram,pos) = pos_q_gram
 
-    pos_range = range(max(pos-max_dist,0), pos+max_dist+1)
+    pos_range = list(range(max(pos-max_dist,0), pos+max_dist+1))
 
     for test_pos in pos_range:
       test_pos_q_gram = (q_gram,test_pos)
@@ -1002,7 +1002,7 @@ def editdist(str1, str2, min_threshold = None):
     str1, str2 = str2, str1
     n, m =       m, n
 
-  current = range(n+1)
+  current = list(range(n+1))
 
   for i in range(1, m+1):
 
@@ -1094,7 +1094,7 @@ def mod_editdist(str1, str2, min_threshold = None):
 
   d = []  # Table with the full distance matrix
 
-  current = range(n+1)
+  current = list(range(n+1))
   d.append(current)
 
   for i in range(1,m+1):
@@ -1183,7 +1183,7 @@ def editdist_edits(str1, str2):
 
   d = []  # Table with the full distance matrix
 
-  current = range(n+1)
+  current = list(range(n+1))
   d.append(current)
 
   for i in range(1,m+1):
@@ -1719,7 +1719,7 @@ def compression(str1, str2, compressor='zlib', min_threshold = None):
     #print
 
     if (c21 != c12):
-      print str1, str2, c12, c21
+      print(str1, str2, c12, c21)
 
   if (c12 == 0.0):
     return 0.0  # Maximal distance
@@ -1727,8 +1727,8 @@ def compression(str1, str2, compressor='zlib', min_threshold = None):
   w = 1.0 - (c12 - min(c1,c2)) / max(c1,c2)
 
   if (w < 0.0):
-    print 'warning:Compression based comparison smaller than 0.0 with ' + \
-          'strings "%s" and "%s": %.3f (cap to 1.0)' % (str1, str2, w)
+    print('warning:Compression based comparison smaller than 0.0 with ' + \
+          'strings "%s" and "%s": %.3f (cap to 1.0)' % (str1, str2, w))
     w = 0.0
 
   assert (w >= 0.0) and (w <= 1.0), 'Similarity weight outside 0-1: %f' % (w)
@@ -2694,6 +2694,6 @@ if (__name__ == '__main__'):
       msg.append('  Error: EditD > Modified EditD')
 
   for m in msg:
-    print m
+    print(m)
 
 # =============================================================================
