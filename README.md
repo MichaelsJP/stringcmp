@@ -1,3 +1,5 @@
+# Originally by datamade --> https://github.com/datamade/stringcmp
+# Updated by vlatco --> https://github.com/vladtco/stringcmp
 # strcmp
 String comparison functions from FEBRL
 
